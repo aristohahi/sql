@@ -1,0 +1,62 @@
+Use AdventureWorks2019
+Go
+Select ProductID, Name, Color, ListPrice
+From Production.Product
+
+Select ProductID, Name, Color, ListPrice
+From Production.Product
+Where ListPrice != 0
+
+Select ProductID, Name, Color, ListPrice
+From Production.Product
+Where Color is NULL
+
+Select ProductID, Name, Color, ListPrice
+From Production.Product
+Where Color is Not NULL
+
+Select ProductID, Name, Color, ListPrice
+From Production.Product
+Where Color is Not NULL And ListPrice > 0
+
+Select Name, Color
+From Production.Product
+Where Color is Not NULL
+
+Select ProductID, Name
+From Production.Product
+Where ProductID between 400 and 500
+
+Select ProductID, Name, color
+From Production.Product
+Where color = 'black' or color = 'blue'
+
+Select Name 
+From Production.Product
+Where Name Like 'S%'
+
+Select Name, ListPrice
+From Production.Product
+Where Name Like 'S%'
+Order By Name 
+
+Select Name, ListPrice
+From Production.Product
+Where Name Like 'A%' or Name Like 'S%'
+Order By Name 
+
+Select Name
+From Production.Product
+Where Name Like 'SPO[^K]%'
+Order By Name 
+
+Select Distinct Color
+From Production.Product
+Order By Color desc
+
+Select Distinct ProductSubcategoryID, Color
+From Production.Product
+Where ProductSubcategoryID is Not NULL And Color is Not NULL
+Order By Color 
+
+
