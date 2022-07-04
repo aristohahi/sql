@@ -1,0 +1,49 @@
+--1
+Select c.City, c.CustomerID, e.EmployeeID
+From Customers c join Employees e on c.City = e.City
+Group by c.City, c.CustomerID, e.EmployeeID
+--2
+Select c.City, c.CustomerID, e.EmployeeID
+From Customers c left join Employees e on c.City = e.City
+Group by c.City, c.CustomerID, e.EmployeeID
+Having e.EmployeeID is null
+--3
+Select p.ProductName, p.ProductID, SUM(od.Quantity)[quantity]
+From Orders o left join [Order Details] od on o.OrderID = od.OrderID join Products p on od.ProductID = p.ProductID
+Group by p.ProductName, p.ProductID
+--4
+select c.City, o.OrderID, SUM(od.Quantity)[quantity]
+from [Order Details] od left join Orders o on od.OrderID = o.OrderID join Customers c on o.CustomerID = c.CustomerID
+Group by c.City, o.OrderID
+--5
+select City, count(CustomerID)[customer number]
+from Customers 
+group by City
+having count(CustomerID) >= 2
+--6
+select c.City, count(od.ProductID)[kinds of product]
+from [Order Details] od left join Orders o on od.OrderID = o.OrderID join Customers c on o.CustomerID = c.CustomerID
+group by c.City
+having count(od.ProductID) >= 2
+order by c.City
+--7
+select c.CustomerID, c.ContactName, o.ShipCity, c.City
+from Orders o join Customers c on o.CustomerID = c.CustomerID
+where o.ShipCity != c.City
+--8
+select top 5 od.ProductID, AVG(od.UnitPrice)[average price], c.City, SUM(od.Quantity)[quantity]
+from [Order Details] od left join orders o on od.OrderID = o.OrderID join customers c on o.CustomerID = c.CustomerID
+group by od.ProductID, c.City
+order by [quantity] desc
+--9
+select o.ShipCity, e.City
+from Orders o full join Employees e on o.ShipCity = e.City
+where o.ShipCity is null and e.City is not null
+--10
+select top 1 e.City, e.EmployeeID, SUM(od.Quantity)[quantity], count(o.OrderID)[quantity of order]
+from [Order Details] od join Orders o on od.OrderID = o.OrderID join Employees e on o.EmployeeID = e.EmployeeID
+group by e.City, e.EmployeeID
+order by SUM(od.Quantity) desc, count(o.OrderID) desc
+
+
+
